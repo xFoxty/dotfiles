@@ -1,3 +1,6 @@
+call plug#begin('~/.vim/plugged')
+Plug 'morhetz/gruvbox'
+call plug#end()
 " --- 基础设置 ---
 set spell spelllang=en_us
 set nocompatible         " 关闭兼容模式
@@ -12,8 +15,8 @@ set showmatch       " 光标在括号上时提示匹配
 set scrolloff=3     " 光标离上下边缘至少 3 行
 set hlsearch      " 搜索高亮
 " --- 样式主题 ---
-colorscheme desert       " 使用 desert 主题
-    
+colorscheme gruvbox
+set background=dark
 " --- 缩进设置 ---
 set tabstop=4            " Tab 宽度为 4
 set shiftwidth=4         " 缩进宽度为 4
