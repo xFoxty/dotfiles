@@ -36,7 +36,7 @@ set laststatus=2         " 总是显示状态栏
 
 " --- 快捷键与交互 ---
 let mapleader=" "
-inoremap jj <Esc>        " jj 回到普通模式
+inoremap jj <Esc>
 " 在插入模式用 Ctrl+h/j/k/l 移动光标
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
@@ -53,3 +53,6 @@ set mouse=a            " 鼠标可用（可选）
 set ttyfast            " 加速 redraw
 set noswapfile         " 不要生成 .swp 临时文件
 set undofile           " 持久化撤销
+" --- 隐藏查看 ---
+set list
+set listchars=tab:→\ ,space:·,eol:↵
