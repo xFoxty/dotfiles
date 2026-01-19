@@ -1,13 +1,44 @@
 return {
 	{
+		"goolord/alpha-nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			local alpha = require("alpha")
+			local dashboard = require("alpha.themes.dashboard")
+			dashboard.section.header.opts.hl = "NaviLogo"
+			vim.api.nvim_set_hl(0, "NaviLogo", { fg = "#2ac3de", bold = true })
+			dashboard.section.header.val = {
+				[[███╗   ██╗ █████╗ ██╗   ██╗██╗]],
+				[[████╗  ██║██╔══██╗██║   ██║██║]],
+				[[██╔██╗ ██║███████║██║   ██║██║]],
+				[[██║╚██╗██║██╔══██║╚██╗ ██╔╝██║]],
+				[[██║ ╚████║██║  ██║ ╚████╔╝ ██║]],
+				[[╚═╝  ╚═══╝╚═╝  ╚═╝  ╚═══╝  ╚═╝]],
+				[[:xFoxty]],
+				[[❤️-> :)]],
+			}
+			local padding = function(n)
+				return { type = "padding", val = n }
+			end
+
+			local layout = {
+				padding(10),
+				dashboard.section.header, -- 你的 Logo
+				padding(2),
+			}
+			dashboard.section.buttons.val = {}
+			alpha.setup({ layout = layout })
+		end,
+	},
+	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
 		opts = {
 			indent = {
-				char = "│", -- 这里可以用 "│" (实线), "╎" (虚线), 或者 "┆"
+				char = "│",
 			},
 			scope = {
-				enabled = true, -- 开启“作用域”高亮，当你光标在某个代码块内，那根线会变色
+				enabled = true,
 				show_start = true,
 				show_end = true,
 			},
@@ -17,7 +48,7 @@ return {
 		},
 		config = function(_, opts)
 			vim.api.nvim_set_hl(0, "IblIndent", { fg = "#3b4261" })
-			vim.api.nvim_set_hl(0, "IblScope", { fg = "#7aa2f7" }) -- 当前光标所在块的颜色（蓝色）
+			vim.api.nvim_set_hl(0, "IblScope", { fg = "#7aa2f7" }) -- 当前光标所在块的颜色
 
 			require("ibl").setup(opts)
 		end,
