@@ -1,4 +1,26 @@
 return {
+	"neovim/nvim-lspconfig",
+	{
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = { "williamboman/mason.nvim" },
+		config = function()
+			require("mason-lspconfig").setup({
+				ensure_installed = _G.LSP_SERVERS or {},
+				automatic_installation = true,
+			})
+		end,
+	},
+	{
+		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+		},
+		config = function()
+			require("cmp-config").setup()
+		end,
+	},
 	{
 		"goolord/alpha-nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -78,6 +100,8 @@ return {
 		priority = 1000, -- 最高优先级
 		config = function()
 			require("mason").setup()
+			local mason_path = vim.fn.stdpath("data") .. "/mason/bin"
+			vim.env.PATH = mason_path .. ":" .. vim.env.PATH
 		end,
 	},
 	-- leader 备忘录

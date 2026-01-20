@@ -4,7 +4,6 @@ TARGET_DIR=$(pwd)
 
 mkdir -p "$TARGET_DIR/nvim"
 mkdir -p "$TARGET_DIR/yazi"
-mkdir -p "$TARGET_DIR/vim"
 
 cp ~/.vimrc ~/dotfiles/
 rsync -av --delete --exclude="lazy-lock.json" "$HOME/.config/nvim/" "$TARGET_DIR/nvim/"
