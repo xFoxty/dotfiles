@@ -190,7 +190,6 @@ return {
 	-- 底部状态栏美化
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" }, -- 注意这里加了 nvim- 前缀
 		config = function()
 			require("lualine").setup({
 				options = {
