@@ -23,3 +23,10 @@ opt.mouse = "a" -- 鼠标支持
 opt.swapfile = false -- 禁用 swp
 opt.undofile = true -- 持久化撤销
 opt.clipboard = "unnamedplus" -- 接入系统剪切板
+-- 1. 开启折叠
+opt.foldenable = true
+-- 2. 设置折叠方式为 expr (表达式)
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- 4. 默认展开所有代码
+opt.foldlevel = 99
