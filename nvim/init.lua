@@ -1,5 +1,9 @@
-require("keymaps")
-require("options")
+--leader key
+vim.g.maplocalleader = " "
+vim.g.mapleader = " "
+vim.o.timeout = true
+vim.o.timeoutlen = 500
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -37,7 +41,5 @@ for _, server in ipairs(servers) do
 	vim.lsp.enable(server)
 end
 
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "查找文件" })
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "全文搜索" })
-vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "切换缓冲区" })
+require("keymaps")
+require("options")

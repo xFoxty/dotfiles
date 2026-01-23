@@ -11,6 +11,44 @@ return {
 		end,
 	},
 	{
+		"folke/trouble.nvim",
+		opts = {},
+		cmd = "Trouble",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		keys = {
+			{
+				"<leader>xx",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				desc = "项目诊断 (所有报错)",
+			},
+			{
+				"<leader>xX",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				desc = "当前文件诊断 (本文件报错)",
+			},
+			{
+				"<leader>cs",
+				"<cmd>Trouble symbols toggle focus=false<cr>",
+				desc = "代码大纲 (符号列表)",
+			},
+			{
+				"<leader>cl",
+				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+				desc = "LSP定义/引用列表",
+			},
+			{
+				"<leader>xL",
+				"<cmd>Trouble loclist toggle<cr>",
+				desc = "位置列表 (Location List)",
+			},
+			{
+				"<leader>xQ",
+				"<cmd>Trouble qflist toggle<cr>",
+				desc = "Quickfix 列表",
+			},
+		},
+	},
+	{
 		"kdheepak/lazygit.nvim",
 		cmd = {
 			"LazyGit",
@@ -64,12 +102,19 @@ return {
 			dashboard.section.header.opts.hl = "NaviLogo"
 			vim.api.nvim_set_hl(0, "NaviLogo", { fg = "#2ac3de", bold = true })
 			dashboard.section.header.val = {
-				[[███╗   ██╗ █████╗ ██╗   ██╗██╗]],
-				[[████╗  ██║██╔══██╗██║   ██║██║]],
-				[[██╔██╗ ██║███████║██║   ██║██║]],
-				[[██║╚██╗██║██╔══██║╚██╗ ██╔╝██║]],
-				[[██║ ╚████║██║  ██║ ╚████╔╝ ██║]],
-				[[╚═╝  ╚═══╝╚═╝  ╚═╝  ╚═══╝  ╚═╝]],
+				[[     ####                ]],
+				[[    #+ ###               ]],
+				[[   #*  ##################]],
+				[[  ##=:::-+####*=##*    ##]],
+				[[ ####-######++#:-##.  *# ]],
+				[[###-#.######++# -###*##  ]],
+				[[#+##:######### :#######  ]],
+				[[###              +#####  ]],
+				[[##                -####  ]],
+				[[  #+.           :#####   ]],
+				[[    ###*+-    :   -###   ]],
+				[[       ##:  =#=  +##     ]],
+				[[       ########*:-##     ]],
 				[[:xFoxty]],
 				[[❤️-> :)]],
 			}
@@ -78,7 +123,7 @@ return {
 			end
 
 			local layout = {
-				padding(10),
+				padding(3),
 				dashboard.section.header, -- 你的 Logo
 				padding(2),
 			}
@@ -104,7 +149,7 @@ return {
 		},
 		config = function(_, opts)
 			vim.api.nvim_set_hl(0, "IblIndent", { fg = "#3b4261" })
-			vim.api.nvim_set_hl(0, "IblScope", { fg = "#7aa2f7" }) -- 当前光标所在块的颜色
+			vim.api.nvim_set_hl(0, "IblScope", { fg = "#7aa2f7" })
 
 			require("ibl").setup(opts)
 		end,
@@ -162,6 +207,40 @@ return {
 			"nvim-lua/plenary.nvim",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
+		config = function()
+			require("telescope").setup({
+				defaults = {
+					layout_strategy = "horizontal",
+					layout_config = {
+						horizontal = {
+							preview_width = 0.5,
+						},
+						width = 0.9,
+					},
+					mappings = {
+						n = {
+							["d"] = require("telescope.actions").delete_buffer,
+						},
+					},
+					file_ignore_patterns = { "node_modules", "%.git/" },
+				},
+			})
+		end,
+	},
+	{
+		"MagicDuck/grug-far.nvim",
+		config = function()
+			require("grug-far").setup({})
+		end,
+		keys = {
+			{
+				"<leader>rp",
+				function()
+					require("grug-far").open()
+				end,
+				desc = "全局替换",
+			},
+		},
 	},
 	{
 		"danilamihailov/beacon.nvim",
@@ -194,8 +273,9 @@ return {
 			require("lualine").setup({
 				options = {
 					theme = "auto",
-					component_separators = { left = "", right = "" },
-					section_separators = { left = "", right = "" },
+					component_separators = { left = "|", right = "|" },
+					section_separators = { left = "", right = "" },
+					globalstatus = true,
 				},
 				sections = {
 					lualine_c = {
