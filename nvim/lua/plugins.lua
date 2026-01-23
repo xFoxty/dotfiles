@@ -11,6 +11,31 @@ return {
 		end,
 	},
 	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter", -- 必须，用于解析语法
+			"nvim-tree/nvim-web-devicons", -- 可选，用于显示图标
+		},
+		---@module 'render-markdown'
+		---@type render_markdown.Config
+		opts = {
+			heading = {
+				icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+				signs = { "󰫎 " },
+			},
+			code = {
+				style = "full",
+				left_pad = 2,
+				right_pad = 2,
+				terminal_render = true,
+			},
+			checkbox = {
+				unchecked = { icon = "󰄱 " },
+				checked = { icon = "󰱒 " },
+			},
+		},
+	},
+	{
 		"folke/trouble.nvim",
 		opts = {},
 		cmd = "Trouble",
@@ -251,7 +276,7 @@ return {
 		build = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter").setup({
-				ensure_installed = { "lua", "vim", "vimdoc", "python", "javascript", "markdown" },
+				ensure_installed = _G.treesitter_languages,
 				highlight = { enable = true },
 				indent = { enable = true },
 			})

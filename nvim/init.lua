@@ -17,7 +17,21 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 local servers = { "lua_ls", "vtsls" }
-
+local treesitter_languages = {
+	"lua",
+	"vim",
+	"vimdoc",
+	"query",
+	"markdown",
+	"markdown_inline",
+	"python",
+	"javascript",
+	"typescript",
+	"json",
+	"html",
+	"css",
+}
+_G.treesitter_languages = treesitter_languages
 _G.LSP_SERVERS = servers
 require("lazy").setup("plugins")
 
