@@ -13,4 +13,5 @@ rules = [
     { name = "*.py",  use = "edit" },
     { name = "*.md",  use = "edit" },
     { mime = "text/*", use = "edit" },
+    { name = "*", use = "edit" }
 ]

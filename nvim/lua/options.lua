@@ -1,5 +1,10 @@
 local opt = vim.opt
 
+vim.g.maplocalleader = " "
+vim.g.mapleader = " "
+vim.o.timeout = true
+vim.o.timeoutlen = 1500
+
 opt.cmdheight = 0
 opt.spell = true
 opt.spelllang = { "en_us", "cjk" }

@@ -9,12 +9,6 @@ keymap("i", "<C-l>", "<Right>")
 keymap("i", "<C-k>", "<Up>")
 keymap("i", "<C-j>", "<Down>")
 
--- 移动选中文本 (上下移动行)
-keymap("v", "<leader>j", ":m '>+1<CR>gv=gv")
-keymap("v", "<leader>k", ":m '<-2<CR>gv=gv")
-keymap("n", "<leader>j", ":m .+1<CR>==")
-keymap("n", "<leader>k", ":m .-2<CR>==")
-
 -- x 不剪切
 keymap("n", "x", '"_x')
 
@@ -35,7 +29,8 @@ vim.keymap.set("n", "gi", builtin.lsp_implementations, { desc = "跳转到实现
 
 -- K: 显示悬浮文档 (Hover Documentation) - 类似 VS Code 鼠标悬停
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "显示文档说明" })
-
+-- 一键重命名变量/函数 (Rename)
+keymap("n", "<leader>rn", vim.lsp.buf.rename, { desc = "重命名符号" })
 -- 报错
 -- 1. 查看当前光标的详细报错 (Diagnostic Float)
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "显示当前行报错" })
