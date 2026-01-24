@@ -1,26 +1,40 @@
 return {
 	{
+		"rebelot/kanagawa.nvim",
+		priority = 1000,
+		config = function()
+			require("kanagawa").setup({
+				transparent = true,
+				theme = "wave",
+				overrides = function()
+					return {
+						LineNr = { bg = "none" },
+						NormalFloat = { bg = "none" },
+						FloatBorder = { bg = "none" },
+						FloatTitle = { bg = "none" },
+						SignColumn = { bg = "none" },
+						StatusLine = { bg = "none" },
+					}
+				end,
+			})
+			vim.cmd.colorscheme("kanagawa-wave")
+		end,
+	},
+	{
 		"goolord/alpha-nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			local alpha = require("alpha")
 			local dashboard = require("alpha.themes.dashboard")
 			dashboard.section.header.opts.hl = "NaviLogo"
-			vim.api.nvim_set_hl(0, "NaviLogo", { fg = "#2ac3de", bold = true })
+			vim.api.nvim_set_hl(0, "NaviLogo", { fg = "#f17d3e", bold = true })
 			dashboard.section.header.val = {
-				[[     ####                ]],
-				[[    #+ ###               ]],
-				[[   #*  ##################]],
-				[[  ##=:::-+####*=##*    ##]],
-				[[ ####-######++#:-##.  *# ]],
-				[[###-#.######++# -###*##  ]],
-				[[#+##:######### :#######  ]],
-				[[###              +#####  ]],
-				[[##                -####  ]],
-				[[  #+.           :#####   ]],
-				[[    ###*+-    :   -###   ]],
-				[[       ##:  =#=  +##     ]],
-				[[       ########*:-##     ]],
+				[[██╗   ██╗███████╗     ██████╗ ██████╗ ██████╗ ███████╗]],
+				[[██║   ██║██╔════╝    ██╔════╝██╔═══██╗██╔══██╗██╔════╝]],
+				[[██║   ██║███████╗    ██║     ██║   ██║██║  ██║█████╗  ]],
+				[[╚██╗ ██╔╝╚════██║    ██║     ██║   ██║██║  ██║██╔══╝  ]],
+				[[ ╚████╔╝ ███████║    ╚██████╗╚██████╔╝██████╔╝███████╗]],
+				[[  ╚═══╝  ╚══════╝     ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝]],
 				[[:xFoxty]],
 				[[❤️-> :)]],
 			}
@@ -29,7 +43,7 @@ return {
 			end
 
 			local layout = {
-				padding(3),
+				padding(10),
 				dashboard.section.header,
 				padding(2),
 			}
@@ -38,9 +52,7 @@ return {
 		end,
 	},
 	{ "windwp/nvim-autopairs", config = true },
-	-- Git 状态显示（行号旁边的加减号）
 	{ "lewis6991/gitsigns.nvim", config = true },
-	-- 底部状态栏美化
 	{
 		"nvim-lualine/lualine.nvim",
 		config = function()

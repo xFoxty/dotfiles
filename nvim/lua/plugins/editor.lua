@@ -185,13 +185,6 @@ return {
 		opts = {},
 	},
 	{
-		"rebelot/kanagawa.nvim",
-		priority = 1000,
-		config = function()
-			vim.cmd.colorscheme("kanagawa-wave")
-		end,
-	},
-	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",

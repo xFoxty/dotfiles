@@ -5,8 +5,8 @@ config.font = wezterm.font("JetBrains Mono", { weight = "Medium" })
 config.font_size = 18
 config.line_height = 1.1
 config.color_scheme = "Nord (Gogh)"
-config.window_background_opacity = 0.85
-config.macos_window_background_blur = 30
+config.window_background_opacity = 0.70
+config.macos_window_background_blur = 50
 config.window_decorations = "RESIZE"
 config.enable_tab_bar = false
 config.window_decorations = "RESIZE"
