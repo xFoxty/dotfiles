@@ -59,12 +59,13 @@ end
 _G.LSP_CAPABILITIES = capabilities
 
 for _, server in ipairs(_G.LSP_SERVERS) do
-	local config = {}
-	local ok, custom_config = pcall(require, "lsp." .. server)
-	if ok then
-		config = custom_config
+	local config = {
+		capabilities = vim.deepcopy(_G.LSP_CAPABILITIES),
+	}
+	local has_custom, custom_config = pcall(require, "lsp." .. server)
+	if has_custom then
+		config = vim.tbl_deep_extend("force", config, custom_config)
 	end
-	config.capabilities = _G.LSP_CAPABILITIES
 	vim.lsp.config(server, config)
 	vim.lsp.enable(server)
 end

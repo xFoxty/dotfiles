@@ -35,3 +35,13 @@ opt.foldmethod = "expr"
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 -- 4. 默认展开所有代码
 opt.foldlevel = 99
+-- 拼写检查颜色
+vim.api.nvim_create_autocmd("ColorScheme", {
+	callback = function()
+		vim.api.nvim_set_hl(0, "LspInlayHint", { fg = "#7FB4CA", italic = true })
+		vim.api.nvim_set_hl(0, "SpellBad", { sp = "#7FB4CA", undercurl = true })
+		vim.api.nvim_set_hl(0, "SpellCap", { sp = "#98BB6C", undercurl = true })
+	end,
+})
+vim.api.nvim_set_hl(0, "LspInlayHint", { fg = "#7FB4CA", italic = true })
+vim.api.nvim_set_hl(0, "SpellBad", { sp = "#7FB4CA", undercurl = true })
