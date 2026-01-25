@@ -16,7 +16,6 @@ vim.opt.rtp:prepend(lazypath)
 local base_languages = { "vim", "vimdoc", "query", "markdown_inline" }
 -- 2. 定义核心语言（既要高亮，也要 LSP 的）
 -- 格式：{ 文件类型，LSP 服务器名，格式化工具 }：
-
 local lang_configs = {
 	lua = { "lua", "lua_ls", { "stylua" } },
 	go = { "go", "gopls", { "goimports" } },
@@ -69,5 +68,11 @@ for _, server in ipairs(_G.LSP_SERVERS) do
 	vim.lsp.config(server, config)
 	vim.lsp.enable(server)
 end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+	end,
+})
 
 require("keymaps")
