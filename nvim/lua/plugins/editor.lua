@@ -34,10 +34,29 @@ return {
 		end,
 	},
 	{
+		"mg979/vim-visual-multi",
+		branch = "master",
+		init = function()
+			-- 使用Ctrl-N选择单词（类似于Sublime Text/VS Code中的Ctrl-d）
+			-- 使用Ctrl-Down/Ctrl-Up垂直创建光标
+			-- 使用Shift键和箭头键一次选择一个字符
+			-- 按 n/N 键可跳到下一个/上一个匹配项
+			-- 按[/]选择下一个/上一个光标
+			-- 按q键跳过当前事件并获取下一个事件
+			-- 按Q键移除当前光标/选择内容
+			-- 使用i、a、I、A键启动插入模式
+		end,
+	},
+	{
 		"echasnovski/mini.nvim",
 		version = false,
 		config = function()
 			require("mini.pairs").setup({})
+			require("mini.jump2d").setup({
+				mappings = {
+					start_jumping = "<leader>j",
+				},
+			})
 			require("mini.cursorword").setup({})
 			require("mini.indentscope").setup({
 				symbol = "│",
@@ -60,31 +79,6 @@ return {
 				},
 			})
 		end,
-	},
-	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-tree/nvim-web-devicons",
-		},
-		---@module 'render-markdown'
-		---@type render_markdown.Config
-		opts = {
-			heading = {
-				icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
-				signs = { "󰫎 " },
-			},
-			code = {
-				style = "full",
-				left_pad = 2,
-				right_pad = 2,
-				terminal_render = true,
-			},
-			checkbox = {
-				unchecked = { icon = "󰄱 " },
-				checked = { icon = "󰱒 " },
-			},
-		},
 	},
 	{
 		"kdheepak/lazygit.nvim",
@@ -119,17 +113,6 @@ return {
 			{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
 			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
 		},
-	},
-	{
-		"hrsh7th/nvim-cmp",
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-		},
-		config = function()
-			require("cmp-config").setup()
-		end,
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -184,32 +167,7 @@ return {
 		"numToStr/Comment.nvim",
 		opts = {},
 	},
-	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-		},
-		config = function()
-			require("telescope").setup({
-				defaults = {
-					layout_strategy = "horizontal",
-					layout_config = {
-						horizontal = {
-							preview_width = 0.5,
-						},
-						width = 0.9,
-					},
-					mappings = {
-						n = {
-							["d"] = require("telescope.actions").delete_buffer,
-						},
-					},
-					file_ignore_patterns = { "node_modules", "%.git/" },
-				},
-			})
-		end,
-	},
+
 	{
 		"MagicDuck/grug-far.nvim",
 		config = function()

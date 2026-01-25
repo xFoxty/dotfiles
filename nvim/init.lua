@@ -11,25 +11,42 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	})
 end
-local function add() end
 vim.opt.rtp:prepend(lazypath)
 -- 1. 定义基础解析器（只有高亮，不需要 LSP 的）
 local base_languages = { "vim", "vimdoc", "query", "markdown_inline" }
 -- 2. 定义核心语言（既要高亮，也要 LSP 的）
--- 格式：{ treesitter名字, lsp名字 }
-local core_languages = {
-	{ "lua", "lua_ls" },
-	{ "typescript", "vtsls" },
-	{ "python", "pyright" },
-	{ "markdown", "marksman" },
-	{ "json", "jsonls" },
+-- 格式：{ 文件类型，LSP 服务器名，格式化工具 }：
+
+local lang_configs = {
+	lua = { "lua", "lua_ls", { "stylua" } },
+	go = { "go", "gopls", { "goimports" } },
+	python = { "python", "pyright", { "isort", "black" } },
+	markdown = { "markdown", "marksman", { "prettier" } },
+	json = { "json", "jsonls", { "prettier" } },
+	typescript = { "typescript", "vtsls", { "prettierd", "prettier", stop_after_first = true } },
 }
+lang_configs.javascript = lang_configs.typescript
+
 _G.treesitter_languages = vim.tbl_values(base_languages)
 _G.LSP_SERVERS = {}
-for _, lang in ipairs(core_languages) do
-	table.insert(_G.treesitter_languages, lang[1])
-	table.insert(_G.LSP_SERVERS, lang[2])
+_G.FORMATTERS_BY_FT = {}
+
+local ts_set = {}
+for ft, cfg in pairs(lang_configs) do
+	local ts_name, lsp_name, formatters = cfg[1], cfg[2], cfg[3]
+
+	if lsp_name then
+		table.insert(_G.LSP_SERVERS, lsp_name)
+	end
+
+	_G.FORMATTERS_BY_FT[ft] = formatters
+
+	if not ts_set[ts_name] then
+		table.insert(_G.treesitter_languages, ts_name)
+		ts_set[ts_name] = true
+	end
 end
+
 ---
 require("lazy").setup("plugins")
 ---

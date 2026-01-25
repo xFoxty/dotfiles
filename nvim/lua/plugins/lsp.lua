@@ -1,6 +1,68 @@
 return {
 	"neovim/nvim-lspconfig",
 	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		},
+		config = function()
+			require("telescope").setup({
+				defaults = {
+					layout_strategy = "horizontal",
+					layout_config = {
+						horizontal = {
+							preview_width = 0.5,
+						},
+						width = 0.9,
+					},
+					mappings = {
+						n = {
+							["d"] = require("telescope.actions").delete_buffer,
+						},
+					},
+					file_ignore_patterns = { "node_modules", "%.git/" },
+				},
+			})
+		end,
+	},
+	{
+		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+		},
+		config = function()
+			require("cmp-config").setup()
+		end,
+	},
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+		},
+		---@module 'render-markdown'
+		---@type render_markdown.Config
+		opts = {
+			heading = {
+				icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+				signs = { "󰫎 " },
+			},
+			code = {
+				style = "full",
+				left_pad = 2,
+				right_pad = 2,
+				terminal_render = true,
+			},
+			checkbox = {
+				unchecked = { icon = "󰄱 " },
+				checked = { icon = "󰱒 " },
+			},
+		},
+	},
+	{
 		"williamboman/mason-lspconfig.nvim",
 		dependencies = { "williamboman/mason.nvim" },
 		config = function()
@@ -25,11 +87,7 @@ return {
 			},
 		},
 		opts = {
-			formatters_by_ft = {
-				lua = { "stylua" },
-				python = { "isort", "black" },
-				javascript = { "prettierd", "prettier", stop_after_first = true },
-			},
+			formatters_by_ft = _G.FORMATTERS_BY_FT,
 			format_on_save = {
 				timeout_ms = 500,
 				lsp_fallback = true,
@@ -93,6 +151,24 @@ return {
 				ensure_installed = _G.treesitter_languages,
 				highlight = { enable = true },
 				indent = { enable = true },
+			})
+		end,
+	},
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		dependencies = { "williamboman/mason.nvim" },
+		config = function()
+			local ensure_installed = {}
+			for _, tools in pairs(_G.FORMATTERS_BY_FT or {}) do
+				for _, tool in ipairs(tools) do
+					if type(tool) == "string" then
+						table.insert(ensure_installed, tool)
+					end
+				end
+			end
+			require("mason-tool-installer").setup({
+				ensure_installed = ensure_installed,
+				auto_install = true,
 			})
 		end,
 	},
