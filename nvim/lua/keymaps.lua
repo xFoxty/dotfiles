@@ -6,10 +6,9 @@ keymap("i", "jj", "<Esc>")
 -- 插入模式下移动光标
 keymap("i", "<C-h>", "<Left>")
 keymap("i", "<C-l>", "<Right>")
-keymap("i", "<C-k>", "<Up>")
 keymap("i", "<C-j>", "<Down>")
-
--- x 不剪切
+keymap("n", "<leader>o", "o<Esc>", { desc = "在下方创建空行" })
+keymap("n", "<leader>O", "O<Esc>", { desc = "在上方创建空行" })
 keymap("n", "x", '"_x')
 
 local builtin = require("telescope.builtin")
