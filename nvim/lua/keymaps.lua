@@ -10,6 +10,9 @@ keymap("i", "<C-j>", "<Down>")
 keymap("n", "<leader>o", "o<Esc>", { desc = "在下方创建空行" })
 keymap("n", "<leader>O", "O<Esc>", { desc = "在上方创建空行" })
 keymap("n", "x", '"_x')
+-- c 不计入寄存器
+vim.keymap.set("n", "c", '"_c', { noremap = true })
+vim.keymap.set("x", "c", '"_c', { noremap = true })
 
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "查找文件" })

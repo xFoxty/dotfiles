@@ -205,6 +205,11 @@ return {
 		keys = {
 			{ "<leader>y", "<cmd>Yazi<cr>", desc = "打开 Yazi" },
 		},
+		---@type YaziConfig | {}
+		opts = {
+			floating_window_scaling_factor = 0.9,
+			yazi_floating_window_border = "single",
+		},
 	},
 	{
 		"stevearc/oil.nvim",

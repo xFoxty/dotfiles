@@ -1,14 +1,23 @@
 return {
 	{ "nvim-treesitter/nvim-treesitter-context" },
 	{
-		"rebelot/kanagawa.nvim",
+		"catppuccin/nvim",
+		name = "catppuccin",
 		priority = 1000,
 		config = function()
-			require("kanagawa").setup({
-				transparent = true,
-				theme = "wave",
+			require("catppuccin").setup({
+				flavour = "mocha",
+				-- transparent_background = true,
+				integrations = {
+					cmp = true,
+					gitsigns = true,
+					mini = {
+						enabled = true,
+						indentscope_color = "",
+					},
+				},
 			})
-			vim.cmd.colorscheme("kanagawa-wave")
+			vim.cmd.colorscheme("catppuccin")
 		end,
 	},
 	{
