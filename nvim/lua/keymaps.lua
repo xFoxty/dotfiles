@@ -37,3 +37,17 @@ vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "显示当�
 -- 2. 跳转到上一个/下一个报错 (快速横跳)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "上一个报错" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "下一个报错" })
+-- 分屏
+-- 分屏管理
+vim.keymap.set("n", "<leader>sv", ":vsplit<CR>", { desc = "垂直分屏" })
+vim.keymap.set("n", "<leader>sh", ":split<CR>", { desc = "水平分屏" })
+vim.keymap.set("n", "<leader>sc", "<C-w>c", { desc = "关闭当前窗口" })
+vim.keymap.set("n", "<leader>so", "<C-w>o", { desc = "关闭其他窗口" })
+
+vim.keymap.set("n", "<leader>sm", "<C-w>|<C-w>_", { desc = "最大化当前窗口" })
+vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "等分所有窗口" })
+
+vim.keymap.set("n", "<leader>wh", ":vertical resize -5<CR>", { desc = "窗口变窄" })
+vim.keymap.set("n", "<leader>wl", ":vertical resize +5<CR>", { desc = "窗口变宽" })
+vim.keymap.set("n", "<leader>wk", ":resize +5<CR>", { desc = "窗口变高" })
+vim.keymap.set("n", "<leader>wj", ":resize -5<CR>", { desc = "窗口变矮" })

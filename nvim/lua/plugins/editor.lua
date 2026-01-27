@@ -48,6 +48,20 @@ return {
 		end,
 	},
 	{
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup({
+				"*",
+			}, {
+				RGB = true,
+				RRGGBB = true,
+				names = false,
+				RRGGBBAA = true,
+				css = true,
+			})
+		end,
+	},
+	{
 		"echasnovski/mini.nvim",
 		version = false,
 		config = function()
@@ -191,5 +205,19 @@ return {
 		keys = {
 			{ "<leader>y", "<cmd>Yazi<cr>", desc = "打开 Yazi" },
 		},
+	},
+	{
+		"stevearc/oil.nvim",
+		opts = {},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("oil").setup({
+				columns = { "icon" },
+				view_options = {
+					show_hidden = true,
+				},
+			})
+			vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "打开 Oil 文件管理" })
+		end,
 	},
 }

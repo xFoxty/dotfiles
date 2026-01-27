@@ -1,4 +1,5 @@
 return {
+	{ "nvim-treesitter/nvim-treesitter-context" },
 	{
 		"rebelot/kanagawa.nvim",
 		priority = 1000,
@@ -6,16 +7,6 @@ return {
 			require("kanagawa").setup({
 				transparent = true,
 				theme = "wave",
-				overrides = function()
-					return {
-						LineNr = { bg = "none" },
-						NormalFloat = { bg = "none" },
-						FloatBorder = { bg = "none" },
-						FloatTitle = { bg = "none" },
-						SignColumn = { bg = "none" },
-						StatusLine = { bg = "none" },
-					}
-				end,
 			})
 			vim.cmd.colorscheme("kanagawa-wave")
 		end,

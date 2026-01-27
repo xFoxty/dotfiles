@@ -1,5 +1,4 @@
 local opt = vim.opt
-
 vim.g.maplocalleader = " "
 vim.g.mapleader = " "
 vim.o.timeout = true
