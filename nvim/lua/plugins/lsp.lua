@@ -38,31 +38,6 @@ return {
 		end,
 	},
 	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-tree/nvim-web-devicons",
-		},
-		---@module 'render-markdown'
-		---@type render_markdown.Config
-		opts = {
-			heading = {
-				icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
-				signs = { "󰫎 " },
-			},
-			code = {
-				style = "full",
-				left_pad = 2,
-				right_pad = 2,
-				terminal_render = true,
-			},
-			checkbox = {
-				unchecked = { icon = "󰄱 " },
-				checked = { icon = "󰱒 " },
-			},
-		},
-	},
-	{
 		"williamboman/mason-lspconfig.nvim",
 		dependencies = { "williamboman/mason.nvim" },
 		config = function()
