@@ -8,6 +8,9 @@ return {
 	},
 	opts = {
 		lang = "golang",
+		test = {
+			enabled = true,
+		},
 		cn = {
 			enabled = true,
 			translator = true,

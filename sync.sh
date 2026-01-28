@@ -9,6 +9,7 @@ mkdir -p "$TARGET_DIR/wezterm"
 cp ~/.vimrc ~/dotfiles/
 cp ~/.tmux.conf ~/dotfiles/
 cp ~/.ignore ~/dotfiles/
+cp ~/.ideavimrc ~/dotfiles/
 rsync -av --delete --exclude="lazy-lock.json" "$HOME/.config/nvim/" "$TARGET_DIR/nvim/"
 rsync -av --delete "$HOME/.config/yazi/" "$TARGET_DIR/yazi/"
 rsync -av --delete "$HOME/.config/wezterm/" "$TARGET_DIR/wezterm"
