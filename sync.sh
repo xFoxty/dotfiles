@@ -18,5 +18,25 @@ rsync -av --delete "$HOME/.config/wezterm/" "$TARGET_DIR/wezterm"
 
 git add .
 git commit -m "Update configs: $(date +'%Y-%m-%d %H:%M:%S')"
-git push origin main
-echo "搞定"
+
+echo ""
+echo "=== 变更内容 ==="
+git diff HEAD~1 HEAD --stat
+echo ""
+echo "是否提交？ [y/n/p(只push不提交新commit)]"
+read -r confirm
+
+case "$confirm" in
+    [Yy])
+        git push origin main
+        echo "搞定"
+        ;;
+    [Pp])
+        git push origin main
+        echo "已推送"
+        ;;
+    *)
+        git reset --soft HEAD~1
+        echo "已取消 commit"
+        ;;
+esac
